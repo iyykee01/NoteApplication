@@ -2,25 +2,34 @@ class NotesApplication {
 	
 	constructor (author) {
 		this.author = author;
-		this.notes = []
+		this.notes = [];
+	}
+		/*
+		* this function takes the content as a parameter 
+	  	* and adds it to the note list of the object.
+		*/
 		
-/*
-* this function takes the content as a parameter and adds it to the note list of the object.
-*/
-
 		create (note_content) {
-			this.notes.push(note_content);
-			return notes;
+			if(typeof(note_content) === 'string'){
+				this.notes.push(note_content);
+				return this.notes;	
+			}
+			else{
+				return 'Enter a valid word'
+			}
 		}
 		
 		/*
-		*this function iterates through th notes array and return the index of each items as the "note_id", note_content as 'note content' and the author represent the author 
+		* this function iterates through th notes array 
+		* and return the index of each items as the 
+		* "note_id", note_content as 'note content' 
+		* and the author represent the author 
 		*/
 		
 		listNotes() {
-			for(var i in  notes){
+			for(let i in  this.notes){
 				console.log('Note ID: ' + i);
-				console.log('note_CONTENT: ' + notes[i]);
+				console.log('note_CONTENT: ' + this.notes[i]);
 				console.log('By Author: ' + this.author);
 			}
 		}
@@ -29,17 +38,28 @@ class NotesApplication {
 		*get the note id and return the content in of that note as a string
 		*/
 
-		get_noteId (note_id){
-			return notes[note_id];
+		get_noteId(note_id) {
+			if(!this.notes[note_id]){
+				return 'Book not found'
+			}
+			else{
+				return this.notes[note_id];
+			}
 		}
 		
 		/*
-		*this method returns the takes the search string, search_text and return the notes that text within it in the following format
+		* this method returns the takes the search string, 
+		* search_text and return the notes 
+		* that text within it in the following format
 		*/
-		search (search_text) {
-			for(i in notes){
-				if(notes[i] ===  search_text){
-					return notes[i];
+		
+		searches(search_text) {
+			for(let i in this.notes){
+				if(search_text === this.notes[i]) {
+					console.log('Showing result for search: ' + search_text)
+					console.log('Note ID: ' + i)
+					console.log(this.notes[i])
+					console.log('BY Author ' + this.author)
 				}
 			}
 		}
@@ -47,23 +67,21 @@ class NotesApplication {
 		/*
 		* This function deletes the note at the index note_id of the note list
 		*/
-		delete(note_id){
-			notes.splice(note_id, 1);
-			return notes;
+		delete_note(note_id){
+			if(typeof(note_id) === 'number'){
+				this.notes.splice(note_id, 1);
+				return this.notes;	
+			}else{
+				return "please enter a number"
+			}
+			
 		}
 
 		/*
 		*This funcyion replaces the in content in the 
 		*/
 		edit(note_id, new_content){
-			notes[note_id] = new_content;
-			return notes;
+			this.notes[note_id] = new_content;
+			return this.notes;
 		}
-	}
-	
 }
-
-
-
-let note = new NotesApplication('kim gassi');
-note.create('checkers')
