@@ -1,17 +1,16 @@
 class NotesApplication {
 	
 	constructor (author) {
-	
 		this.author = author;
+		this.notes = []
 		
-		let notes = []
-		
-		/*
-		*this function takes the content as a parameter and adds it to the note list of the object.
-		*/
+/*
+* this function takes the content as a parameter and adds it to the note list of the object.
+*/
 
 		create (note_content) {
-			notes.push(note_content);
+			this.notes.push(note_content);
+			return notes;
 		}
 		
 		/*
@@ -31,23 +30,40 @@ class NotesApplication {
 		*/
 
 		get_noteId (note_id){
-			return notes[note_id]
+			return notes[note_id];
 		}
 		
 		/*
 		*this method returns the takes the search string, search_text and return the notes that text within it in the following format
 		*/
 		search (search_text) {
-			
+			for(i in notes){
+				if(notes[i] ===  search_text){
+					return notes[i];
+				}
+			}
 		}
 		
 		/*
 		* This function deletes the note at the index note_id of the note list
 		*/
 		delete(note_id){
-			note.splice(note_id, 1)
+			notes.splice(note_id, 1);
+			return notes;
+		}
+
+		/*
+		*This funcyion replaces the in content in the 
+		*/
+		edit(note_id, new_content){
+			notes[note_id] = new_content;
+			return notes;
 		}
 	}
 	
 }
 
+
+
+let note = new NotesApplication('kim gassi');
+note.create('checkers')
